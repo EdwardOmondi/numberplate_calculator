@@ -1,0 +1,39 @@
+<body class="grid h-screen place-items-center">
+  <div class="card w-96 bg-neutral text-neutral-content">
+    <div class="card-body items-center text-center">
+      <h1 class="text-2xl">Hi there. This is a simple app to determine the number of cars that have been registered
+        starting from KAA001A
+        to the numberplate you put in.</h1>
+      <form class="" [formGroup]="singleNumberplateForm">
+        <div class="form-control w-full max-w-xs">
+          <label class="label">
+            <span class="label-text">Please put in a numberplate</span>
+          </label>
+          <input (onchange)="singlePlateSubmit()" formControlName="numberplate" type="text" placeholder="eg. KCA733B"
+            class="input input-bordered w-full max-w-xs" />
+        </div>
+        <div *ngIf="singleNumberplateForm.controls['numberplate'].invalid
+          &&
+          (singleNumberplateForm.controls['numberplate'].dirty || singleNumberplateForm.controls['numberplate'].touched)
+          " class="mt-2 text-sm text-red-600">
+          <p *ngIf="singleNumberplateForm.controls['numberplate'].value!.length>6">{{getErrorMessage()}}</p>
+        </div>
+      </form>
+      <div class="card-actions justify-end">
+        <button class="btn mt-2" type="submit" (click)="singlePlateSubmit()"
+          [disabled]="!singleNumberplateForm.valid">Submit
+        </button>
+      </div>
+      <div class="" *ngIf="totalSold>0">
+        <p class="mt-6">Total cars registered from KAA001A to {{numberplate}} is:</p>
+        <h1 class="font-bold mt-3 text-3xl"> {{totalSold|number}}</h1>
+      </div>
+    </div>
+  </div>
+</body>
+<footer class="footer footer-center p-4 bg-base-300 text-base-content mt-auto">
+  <aside>
+    <p>Copyright © 2023 - Done by <a class="text-primary" href="https://github.com/EdwardOmondi" target="_blank">Edward
+        Omondi</a> </p>
+  </aside>
+</footer>
